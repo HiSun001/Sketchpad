@@ -1,11 +1,9 @@
-import { addListener } from "cluster";
 
-let canvas:CanvasRenderingContext2D;
+let canvas:any;
 let ctx:any;
 let rect:any;
 let isAllowDrawBool:boolean = false;
 let points:any[] = [];
-
 const INFO = {
     MOUSE_X:0,
     MOUSE_Y:0,
@@ -16,20 +14,23 @@ const INFO = {
     POINT_X:0,
     POINT_Y:0
 }
+const IMG_MIME_TYPE = "image/png";
+const IMG_DOWNLOAD_NAME = '画板图片下载'
 
 window.onload = function() {
-    this.canvas = document.getElementById('canvas');
-    if(!(this.canvas && this.canvas.getContext('2d') )) {
+    canvas = document.getElementById('canvas');
+    if(!(canvas && canvas.getContext('2d') )) {
         console.error("不支持Canvas")
         return ;
     }
-    rect = this.canvas.getBoundingClientRect();
-    ctx = this.canvas.getContext('2d');
+    rect = canvas.getBoundingClientRect();
+    ctx = canvas.getContext('2d');
     initData();
-    addCustomListener()
+    addDrawListener();
+    addControlEvent();
 }
 
-let addCustomListener = function() {
+let addDrawListener = function() {
     document.addEventListener('mousedown', function(event:MouseEvent ){
         draw(event, 'start')
     })
@@ -71,7 +72,6 @@ let draw = function(event:MouseEvent, state:'start'|'move'|'end') {
             isAllowDrawBool = false;
             points = [];
         }
-
     } 
 }
 
@@ -85,6 +85,45 @@ let drawQuadratic = function() {
     ctx.stroke();
     ctx.closePath();
 
+}
+
+let addControlEvent = function() {
+    clearDraw(); // 清除画板
+    downLoadImg(); //下载图片
+    changeColor(); //选择画笔颜色
+}
+
+// 选择颜色
+let changeColor = function() {
+    let colorsDom = document.getElementById('colors');
+    colorsDom.addEventListener('click', function(event:any) {
+        let col = event && event.target  && event.target['id'];
+        ctx.strokeStyle = col;
+    })
+}
+
+// 清除画板
+let clearDraw = function() {
+    let clearDom = document.getElementById('clear');
+    clearDom.addEventListener('click', function() {
+        ctx.clearRect(0, 0, INFO['CANVAS_WIDTH'], INFO['CANVAS_HEIGTH']);  
+    });
+} 
+
+// 保存图片
+let downLoadImg = function() {
+    let downloadDom = document.getElementById('download');
+    downloadDom.addEventListener('click', function() {
+        const imgURL = canvas.toDataURL(IMG_MIME_TYPE);
+        let _dom = document.createElement('a');
+        _dom.download = IMG_DOWNLOAD_NAME;
+        _dom.href = imgURL;
+        _dom.dataset.downloadurl = [IMG_MIME_TYPE, _dom.download, _dom.href].join(':');
+
+        document.body.appendChild(_dom);
+        _dom.click();
+        document.body.removeChild(_dom);
+    })
 }
 
 
@@ -101,6 +140,5 @@ let initData = function() {
     INFO['RECT_LEFT'] =  rect.left * (INFO['CANVAS_WIDTH'] / rect.width);
     INFO['RECT_TOP'] =  rect.top * (INFO['CANVAS_HEIGTH'] / rect.height);
 }
-
 
 export * from "editor"

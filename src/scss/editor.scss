@@ -6,13 +6,37 @@
 .body {
     .content {
         text-align: center;
+        position: relative;
         margin-top: 100px;
     }
     #canvas {
         border:1px solid #cccccc;
         background: #ffffff;
-        height: 600px;
-        width: 1000px;
+        height: 700px;
+        width: 1200px;
+    }
+    .setting {
+        text-align: center;
+        .item {
+            display: inline-block;
+            margin: 10px 10px;
+            img {
+                margin: 6px 10px;
+                width: 34px;
+                height: 34px;
+                &.litter {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+        #colors {
+            .col {
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+            }
+        }
     }
 }
 
