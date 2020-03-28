@@ -54,8 +54,9 @@ let draw = function(event:MouseEvent, state:'start'|'move'|'end') {
     if(!event) {
         return ;
     }
+    const SCROLL_TOP = document.documentElement.scrollTop || document.body.scrollTop;
     INFO['MOUSE_X'] = event['clientX'] - INFO['RECT_LEFT'];
-    INFO['MOUSE_Y'] = event['clientY'] -  INFO['RECT_TOP'];
+    INFO['MOUSE_Y'] = event['clientY'] -  INFO['RECT_TOP'] + SCROLL_TOP;
 
     if(state === 'start') {
         isAllowDrawBool = true;
@@ -170,6 +171,8 @@ let revokeImg = function() {
 
 let initData = function() {
     //initCtx
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = 'blue';
     ctx.lineWidth = 1;
     ctx.lineJoin = 'round';
