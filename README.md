@@ -7,7 +7,7 @@
 ## 截图 
 
 
-![](/src/imgs/canvas.png)
+![图片](src/imgs/canvas.png)
 
 ## Run 
 
