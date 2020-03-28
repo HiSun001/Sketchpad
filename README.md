@@ -7,7 +7,7 @@
 ## 截图 
 
 
-![图片](/src/imgs/canvas.png)
+![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/canvas.PNG)
 
 ## Run 
 
