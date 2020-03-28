@@ -2,13 +2,30 @@
     padding: 0;
     margin: 0;
 }
+.github {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 100px;
+    height: 100px;
+    display: block;
+    z-index: 100;
+    img {
+        position: relative;
+        z-index: 1;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+    }
+}
 
 .body {
+    
     .tit {
         position: absolute;
         text-align: center;
         width: 100%;
-        top:55px;
+        top:7px;
         .title {
             margin-top: -30px;
             font-size: 20px;
@@ -21,7 +38,7 @@
     .content {
         text-align: center;
         position: relative;
-        margin-top: 100px;
+        margin-top: 30px;
     }
     #canvas {
         border:1px solid #cccccc;
