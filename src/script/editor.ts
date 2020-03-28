@@ -15,7 +15,12 @@ const INFO = {
     POINT_Y:0
 }
 const IMG_MIME_TYPE = "image/png";
-const IMG_DOWNLOAD_NAME = '画板图片下载'
+const IMG_DOWNLOAD_NAME = '画板图片下载';
+let CANVAS_CATCH:any = {
+    catchs:[],
+    maxLength:10,
+    remokedBool: false
+}
 
 window.onload = function() {
     canvas = document.getElementById('canvas');
@@ -31,15 +36,15 @@ window.onload = function() {
 }
 
 let addDrawListener = function() {
-    document.addEventListener('mousedown', function(event:MouseEvent ){
+    canvas.addEventListener('mousedown', function(event:MouseEvent ){
         draw(event, 'start')
     })
-    document.addEventListener('mousemove', function(event:MouseEvent ){
+    canvas.addEventListener('mousemove', function(event:MouseEvent ){
         if(!isAllowDrawBool) return;
         draw(event, 'move');
     })
 
-    document.addEventListener('mouseup', function(event:MouseEvent ){
+    canvas.addEventListener('mouseup', function(event:MouseEvent ){
         draw(event, 'end');
     })
 }
@@ -69,10 +74,23 @@ let draw = function(event:MouseEvent, state:'start'|'move'|'end') {
         }
 
         if(state === 'end') {
-            isAllowDrawBool = false;
+            if(isAllowDrawBool) {
+                canvas_catch();
+                isAllowDrawBool = false;
+            }
             points = [];
         }
     } 
+}
+
+let canvas_catch = function(state?:'shift') {
+    CANVAS_CATCH['catchs'].push(canvas.toDataURL()); 
+    let len = CANVAS_CATCH['catchs']['length'];
+    CANVAS_CATCH['remokedBool'] = false;
+    if( len> CANVAS_CATCH.maxLength) {
+        CANVAS_CATCH['catchs'] =  CANVAS_CATCH['catchs'].slice(-CANVAS_CATCH.maxLength)
+    }
+
 }
 
 let drawQuadratic = function() {
@@ -84,13 +102,13 @@ let drawQuadratic = function() {
     INFO['POINT_Y'] = (points[0].y + points[1].y) /2;
     ctx.stroke();
     ctx.closePath();
-
 }
 
 let addControlEvent = function() {
     clearDraw(); // 清除画板
     downLoadImg(); //下载图片
     changeColor(); //选择画笔颜色
+    revokeImg(); //撤销操作
 }
 
 // 选择颜色
@@ -123,6 +141,28 @@ let downLoadImg = function() {
         document.body.appendChild(_dom);
         _dom.click();
         document.body.removeChild(_dom);
+    })
+}
+
+// 撤销操作
+let revokeImg = function() {
+    let revokeDom = document.getElementById('revoke');
+    revokeDom.addEventListener('click', function() {
+        let len = CANVAS_CATCH['catchs'].length;
+        if(len.length < 1) return;
+        if(!CANVAS_CATCH['remokedBool']) {
+            CANVAS_CATCH['catchs'].pop();
+            CANVAS_CATCH['remokedBool'] = true;
+        }
+        ctx.clearRect(0, 0, INFO['CANVAS_WIDTH'], INFO['CANVAS_HEIGTH']);  
+        let img = new Image();
+        let imgURL = CANVAS_CATCH['catchs'].pop();
+        if(imgURL) {
+            img['src'] = imgURL
+            img.addEventListener('load', () => {
+                ctx.drawImage(img, 0, 0, INFO['CANVAS_WIDTH'], INFO['CANVAS_HEIGTH'])
+            });
+        }
     })
 }
 
