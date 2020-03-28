@@ -23,12 +23,12 @@ let CANVAS_CATCH:any = {
 }
 
 window.onload = function() {
+    colItemDom();
     canvas = document.getElementById('canvas');
     if(!(canvas && canvas.getContext('2d') )) {
         console.error("不支持Canvas")
         return ;
     }
-    colItemDom();
     rect = canvas.getBoundingClientRect();
     ctx = canvas.getContext('2d');
     initData();
