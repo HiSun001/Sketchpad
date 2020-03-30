@@ -6,8 +6,10 @@
   "scripts": {
     "build": "webpack --open --watch",
     "dev": "webpack-dev-server --content-base --open --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://github.com/bojue/Sketchpad",
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -23,6 +25,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
+    "gh-pages": "^2.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.1",
