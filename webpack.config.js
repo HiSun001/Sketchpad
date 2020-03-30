@@ -33,5 +33,10 @@ module.exports = {
       filename:"index.html",
       inject:"body"
     })
-  ]
+  ],
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    disableHostCheck: true,
+  }
 };

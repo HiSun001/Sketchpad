@@ -7,8 +7,8 @@
 ## 截图 
 
 
-![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/canvas.PNG)
-
+![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/pc.png)
+![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/phone.png)
 ## Run 
 
 ```
@@ -23,5 +23,11 @@ npm run dev
 ```
 
 浏览器预览地址 : ` http://localhost:8080/ `
+
+## build
+
+```
+npm run build
+```
 
 
