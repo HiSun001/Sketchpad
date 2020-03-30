@@ -7,7 +7,7 @@
 ## 截图 
 
 
-![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/pc.png =600x500)
+![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/pc.png=600x500)
 ![图片](https://github.com/bojue/Sketchpad/blob/master/src/imgs/phone.png = 400x500)
 ## Run 
 
