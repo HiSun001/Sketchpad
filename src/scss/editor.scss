@@ -3,51 +3,38 @@
     margin: 0;
 }
 .github {
-    position: fixed;
+    display: flex;
     right: 10px;
-    top: 10px;
-    width: 100px;
-    height: 100px;
-    display: block;
-    z-index: 100;
+    width: 60px;
+    height: 60px;
     img {
         position: relative;
         z-index: 1;
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        height: 100%;
         cursor: pointer;
     }
 }
 body {
-    overflow: hidden;
+//    position: relative;
+   display: block;
 }
-.body {
-    
-    .tit {
-        position: fixed;
-        text-align: center;
-        width: 100%;
-        top: 11px;
+#canvas {
+    position: fixed;
+    background: #ffffff;
+}
+.paint {
+    position: relative;
+    .title {
+        padding: 5px 10px;
+        border-radius: 5px;
         z-index: 1;
         background: #fff;
-        .title {
-            margin-top: -30px;
-            font-size: 20px;
-            width: 100px;
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-    }
-    .content {
-        text-align: center;
         position: relative;
-        margin-top: 30px;
-    }
-    #canvas {
-        background: #ffffff;
-        // height: 600px;
-        // width: 1000px;
+        margin: 10px auto;
+        width: 100px;
+        border:1px solid #dddddd;
+        text-align: center;
     }
     .setting {
         text-align: center;

@@ -42,7 +42,6 @@ let addDrawListener = function() {
     })
     canvas.addEventListener('mousemove', function(event:MouseEvent ){
         if(!isAllowDrawBool) return;
-        event.preventDefault();
         draw(event, 'move');
     })
     canvas.addEventListener('mouseup', function(event:MouseEvent ){
@@ -55,7 +54,6 @@ let addDrawListener = function() {
     })
     canvas.addEventListener('touchmove', function(event:MouseEvent ){
         draw(event, 'move')
-        event.preventDefault();
     })
     canvas.addEventListener('touchend', function(event:MouseEvent ){
         draw(event, 'end')
@@ -207,11 +205,12 @@ let initData = function() {
  * 2. 获取ctx
  */
 let initCanvasRect = function() {
-    let body = document.body;
-    canvas['width'] = body.clientWidth;
-    canvas['height'] = body.clientHeight;
-    canvas['style']['width'] = body.clientWidth + 'px';
-    canvas['style']['height']= body.clientHeight + 'px';
+    // let body = document.body;
+    let screen = window.screen;
+    canvas['width'] = screen.width;
+    canvas['height'] = screen.height;
+    canvas['style']['width'] = screen.width + 'px';
+    canvas['style']['height']= screen.height + 'px';
     rect = canvas.getBoundingClientRect();
     ctx = canvas.getContext('2d');
     initData();
