@@ -42,8 +42,8 @@ let addDrawListener = function() {
     })
     canvas.addEventListener('mousemove', function(event:MouseEvent ){
         if(!isAllowDrawBool) return;
-        draw(event, 'move');
         event.preventDefault();
+        draw(event, 'move');
     })
     canvas.addEventListener('mouseup', function(event:MouseEvent ){
         draw(event, 'end');
