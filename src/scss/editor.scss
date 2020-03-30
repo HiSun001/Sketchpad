@@ -56,12 +56,12 @@ body {
         bottom: 20px;    
         .item {
             display: inline-block;
-            margin: 10px 10px;
+            margin: 0px;
             img {
                 cursor: pointer;
-                margin: 6px 10px;
-                width: 34px;
-                height: 34px;
+                margin: 0px 10px;
+                width: 30px;
+                height: 30px;
                 &.litter {
                     width: 30px;
                     height: 30px;
