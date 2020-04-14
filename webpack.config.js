@@ -17,7 +17,15 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
     ],
   },
   resolve: {
@@ -31,7 +39,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template:path.resolve(__dirname, 'index.html'),
       filename:"index.html",
-      inject:"body"
+      inject:"body",
+      minify: {
+        collapseWhitespace: true,//删除空格、换行
+      },
     })
   ],
   devServer: {
