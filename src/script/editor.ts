@@ -1,6 +1,6 @@
 
 let canvas:any;
-let ctx:any;
+let ctx:CanvasRenderingContext2D;
 let rect:any;
 let isAllowDrawBool:boolean = false;
 let points:any[] = [];
